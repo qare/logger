@@ -4,7 +4,14 @@
   "description": "Qare logger for Node.JS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --source-maps --out-dir dist",
+    "lint": "eslint --max-warnings=0 src",
+    "flow": "flow check",
+    "test:unit": "mocha --compilers js:babel-core/register test/*",
+    "test": "yarn lint && yarn flow && yarn test:unit",
+    "postinstall": "yarn build",
+    "prettier": "prettier --config ./.prettierrc --write '{src,test}/**/*.js'",
+    "pre-push": "yarn flow && yarn lint"
   },
   "repository": {
     "type": "git",
@@ -15,5 +22,33 @@
   "bugs": {
     "url": "https://github.com/qare/logger/issues"
   },
-  "homepage": "https://github.com/qare/logger#readme"
+  "homepage": "https://github.com/qare/logger#readme",
+  "dependencies": {
+    "log4js": "^4.5.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "7.5.5",
+    "@babel/node": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "@babel/preset-flow": "7.0.0",
+    "@babel/register": "7.5.5",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-qare": "git+https://github.com/qare/eslint-config.git",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-flow-vars": "^0.5.0",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "flow-bin": "^0.104.0",
+    "husky": "^3.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn pre-push"
+    }
+  }
 }
