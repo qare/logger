@@ -1,27 +1,30 @@
+// @flow
+
 import log4js from 'log4js';
 
-import { LEVEL_INFO } from './levels';
+import levels from './levels';
 
-const defaultConfig = {
+const defaultConfig: Object = {
   logger: {
     name: process.env.LOGGER_NAME || '',
-    level: process.env.LOGGER_LEVEL || LEVEL_INFO,
-  }
+    // eslint-disable-next-line import/no-named-as-default-member
+    level: process.env.LOGGER_LEVEL || levels.LEVEL_INFO,
+  },
 };
 
-export function init(_config) {
-  const config = {
+export function init(_config: { name: string, level: $Values<typeof levels> }): Object {
+  const config: Object = {
     ...defaultConfig,
     ..._config,
   };
 
-  const logger = log4js.getLogger();
+  const logger: Object = log4js.getLogger();
   logger.name = config.logger.name;
   logger.level = config.logger.level;
 
   return logger;
 }
 
-const logger = init(defaultConfig);
+const logger: Function = init(defaultConfig);
 
 export default logger;
