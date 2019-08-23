@@ -18,8 +18,7 @@ export function init(_config: { name: string, level: $Values<typeof levels> }): 
     ..._config,
   };
 
-  const logger: Object = log4js.getLogger();
-  logger.name = config.logger.name;
+  const logger: Object = log4js.getLogger(config.logger.name);
   logger.level = config.logger.level;
 
   return logger;

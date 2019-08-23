@@ -29,9 +29,8 @@ var defaultConfig = {
 function init(_config) {
   var config = _objectSpread({}, defaultConfig, {}, _config);
 
-  var logger = _log4js["default"].getLogger();
+  var logger = _log4js["default"].getLogger(config.logger.name);
 
-  logger.name = config.logger.name;
   logger.level = config.logger.level;
   return logger;
 }
