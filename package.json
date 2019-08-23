@@ -4,14 +4,14 @@
   "description": "Qare logger for Node.JS",
   "main": "index.js",
   "scripts": {
-    "build": "babel src --source-maps --out-dir dist",
+    "build-sources": "rm -Rf ./dist && babel src --source-maps --out-dir dist",
     "lint": "eslint --max-warnings=0 src",
     "flow": "flow check",
     "test:unit": "mocha --compilers js:babel-core/register test/*",
     "test": "yarn lint && yarn flow && yarn test:unit",
-    "postinstall": "yarn build",
     "prettier": "prettier --config ./.prettierrc --write '{src,test}/**/*.js'",
-    "pre-push": "yarn flow && yarn lint"
+    "pre-push": "yarn flow && yarn lint",
+    "pre-commit": "yarn build-sources && git add dist"
   },
   "repository": {
     "type": "git",
@@ -48,7 +48,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn pre-push"
+      "pre-push": "yarn pre-push",
+      "pre-commit": "yarn pre-commit"
     }
   }
 }
