@@ -2,12 +2,13 @@ sudo: false
 language: node_js
 node_js:
 - 10.16
+
 jobs:
   include:
-  - stage: test 
+  - stage: test
     script: yarn run lint && yarn run flow
   - stage: build
-    script: yarn run build-sources && yarn add global ./ 
+    script: yarn run build-sources && yarn add global ./
   - stage: deploying
     if: branch = master
     script: yarn build-sources && npm publish || exit 1
