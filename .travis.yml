@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+node_js:
+- 10.16
+jobs:
+  include:
+  - stage: test
+    script: yarn run lint
+  - script: yarn run flow
+  - stage: build
+    script: yarn run build-sources
+  - stage: verifying build
+    script: yarn add global ./
+  - stage: deploying
+    if: branch = master
+    script: yarn build-sources && npm publish || exit 1
