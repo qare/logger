@@ -2,15 +2,18 @@ sudo: false
 language: node_js
 node_js:
 - 10.16
+
+env:
+  global:
+    if: branch != master
+      - NPM_TOKEN=''
+
 jobs:
   include:
   - stage: test
-    script: yarn run lint
-  - script: yarn run flow
+    script: yarn run lint && yarn run flow
   - stage: build
-    script: yarn run build-sources
-  - stage: verifying build
-    script: yarn add global ./
+    script: yarn run build-sources && yarn add global ./
   - stage: deploying
     if: branch = master
     script: yarn build-sources && npm publish || exit 1
