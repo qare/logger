@@ -3,11 +3,6 @@ language: node_js
 node_js:
 - 10.16
 
-env:
-  global:
-    if: branch != master
-      - NPM_TOKEN=''
-
 jobs:
   include:
   - stage: test
