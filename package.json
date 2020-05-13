@@ -1,6 +1,6 @@
 {
   "name": "@qarehealth/logger",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Qare logger for Node.JS",
   "main": "index.js",
   "files": [
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/qare/logger#readme",
   "dependencies": {
-    "log4js": "^4.5.1"
+    "pino": "^6.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -48,6 +48,7 @@
     "eslint-plugin-flowtype": "^3.13.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-no-only-tests": "^2.4.0",
     "eslint-plugin-react": "^7.14.3",
     "flow-bin": "^0.104.0",
     "husky": "^3.0.3"
