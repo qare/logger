@@ -1,6 +1,6 @@
 // @flow
 
-import log4js from 'log4js';
+import pino from 'pino';
 
 import levels from './levels';
 
@@ -18,9 +18,13 @@ export function init(_config: { name: string, level: $Values<typeof levels> }): 
     ..._config,
   };
 
-  const logger: Object = log4js.getLogger(config.logger.name);
-  logger.level = config.logger.level;
-
+  const logger: Object = pino({
+    name: config.logger.name,
+    level: config.logger.level,
+    timestamp: false,
+    mixin: () => ({ timestamp: Date.now() }),
+    nestedKey: 'details',
+  });
   return logger;
 }
 
