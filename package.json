@@ -1,6 +1,6 @@
 {
   "name": "@qarehealth/logger",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Qare logger for Node.JS",
   "main": "index.js",
   "files": [

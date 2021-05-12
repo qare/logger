@@ -1,8 +1,20 @@
 // @flow
 
 import pino from 'pino';
+import { inspect } from 'util';
 
 import levels from './levels';
+
+export function formatError(input: any): { stacktrace: string } {
+  return {
+    stacktrace: inspect(input, {
+      showHidden: false,
+      colors: false,
+      depth: 3,
+      breakLength: Infinity,
+    }),
+  };
+}
 
 const defaultConfig: Object = {
   logger: {
@@ -12,7 +24,10 @@ const defaultConfig: Object = {
   },
 };
 
-export function init(_config: { name: string, level: $Values<typeof levels> }): Object {
+export function init(_config: {
+  name: string,
+  level: $Values<typeof levels>,
+}): Object {
   const config: Object = {
     ...defaultConfig,
     ..._config,
